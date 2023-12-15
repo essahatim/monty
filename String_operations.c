@@ -8,13 +8,14 @@
  */
 void printChar(stack_t **stack, unsigned int line_number)
 {
+	int ascii_val;
 
 	if (stack == NULL || *stack == NULL)
 	{
 		stringError(11, line_number);
 		return;
 	}
-	int ascii_val = (*stack)->n;
+	ascii_val = (*stack)->n;
 
 	if (ascii_val < 0 || ascii_val > 127)
 	{
@@ -25,14 +26,15 @@ void printChar(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * printString - Prints a string composed of ASCII values.
+ * printStr - Prints a string composed of ASCII values.
  *
  * @stack: Pointer to the top node of the stack.
- * @line_number: Line number of the opcode.
+ * @line_num: Line number of the opcode.
  */
-void printString(stack_t **stack, unsigned int line_number)
+void printStr(stack_t **stack, __attribute__((unused))unsigned int line_num)
 {
 	stack_t *tmp;
+	int ascii_val;
 
 	if (stack == NULL || *stack == NULL)
 	{
@@ -42,8 +44,7 @@ void printString(stack_t **stack, unsigned int line_number)
 	tmp = *stack;
 	while (tmp != NULL)
 	{
-		int ascii_val = tmp->n;
-
+		ascii_val = tmp->n;
 		if (ascii_val <= 0 || ascii_val > 127)
 			break;
 		printf("%c", ascii_val);
@@ -60,10 +61,11 @@ void printString(stack_t **stack, unsigned int line_number)
  */
 void rotFirst(stack_t **stack, __attribute__((unused))unsigned int line_number)
 {
+	stack_t *tmp;
 
 	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
 		return;
-	stack_t *tmp = *stack;
+	tmp = *stack;
 
 	while (tmp->next != NULL)
 		tmp = tmp->next;
@@ -82,10 +84,11 @@ void rotFirst(stack_t **stack, __attribute__((unused))unsigned int line_number)
  */
 void rotLast(stack_t **stack, __attribute__((unused))unsigned int line_number)
 {
+	stack_t *tmp;
 
 	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
 		return;
-	stack_t *tmp = *stack;
+	tmp = *stack;
 
 	while (tmp->next != NULL)
 		tmp = tmp->next;

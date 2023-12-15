@@ -70,7 +70,7 @@ void modNodes(stack_t **, unsigned int);
 
 /*String operations*/
 void printChar(stack_t **, unsigned int);
-void printString(stack_t **, unsigned int);
+void printStr(stack_t **, unsigned int);
 void rotFirst(stack_t **, unsigned int);
 void rotLast(stack_t **, unsigned int);
 

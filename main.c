@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
 {
 	if (argc != 2)
 	{
-		fprintf(stdfileError, "USAGE: monty file\n");
+		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
 	openFile(argv[1]);
@@ -22,10 +22,10 @@ int main(int argc, char *argv[])
 /**
  * createNode - Creates a node.
  *
- * @num: Number to go inside the node.
+ * @n: Number to go inside the node.
  * Return: Upon success, a pointer to the node or NULL Otherwise.
  */
-stack_t *createNode(int num)
+stack_t *createNode(int n)
 {
 	stack_t *node = malloc(sizeof(stack_t));
 
@@ -33,7 +33,7 @@ stack_t *createNode(int num)
 		fileError(4);
 	node->next = NULL;
 	node->prev = NULL;
-	node->num = num;
+	node->n = n;
 	return (node);
 }
 
@@ -60,7 +60,7 @@ void freeNodes(void)
  * @newNode: Pointer to the new node.
  * @line: Line number of the opcode.
  */
-void addToQueue(stack_t **newNode, unsigned int line)
+void addToQueue(stack_t **newNode,  __attribute__((unused))unsigned int line)
 {
 	stack_t *tmp;
 

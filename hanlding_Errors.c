@@ -13,9 +13,10 @@
 void fileError(int errorCode, ...)
 {
 	va_list args;
+	int line_number;
+	char *op_code;
 
 	va_start(args, errorCode);
-
 	switch (errorCode)
 	{
 		case 1:
@@ -25,8 +26,8 @@ void fileError(int errorCode, ...)
 			fprintf(stderr, "Error: Can't open file %s\n", va_arg(args, char *));
 			break;
 		case 3:
-			int line_number = va_arg(args, int);
-			char *op_code = va_arg(args, char *);
+			line_number = va_arg(args, int);
+			op_code = va_arg(args, char *);
 
 			fprintf(stderr, "L%d: unknown instruction %s\n", line_number, op_code);
 			break;
@@ -55,9 +56,10 @@ void fileError(int errorCode, ...)
 void stackError(int errorCode, ...)
 {
 	va_list args;
+	int line_number;
+	char *op_code;
 
 	va_start(args, errorCode);
-
 	switch (errorCode)
 	{
 		case 6:
@@ -67,8 +69,8 @@ void stackError(int errorCode, ...)
 			fprintf(stderr, "L%d: can't pop an empty stack\n", va_arg(args, int));
 			break;
 		case 8:
-			int line_number = va_arg(args, unsigned int);
-			char *op_code = va_arg(args, char *);
+			line_number = va_arg(args, unsigned int);
+			op_code = va_arg(args, char *);
 
 			fprintf(stderr, "L%d: can't %s, stack too short\n", line_number, op_code);
 			break;
@@ -92,10 +94,11 @@ void stackError(int errorCode, ...)
 void stringError(int errorCode, ...)
 {
 	va_list args;
+	int line_number;
 
 	va_start(args, errorCode);
 
-	int line_number = va_arg(args, int);
+	line_number = va_arg(args, int);
 
 	switch (errorCode)
 	{

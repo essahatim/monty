@@ -8,13 +8,15 @@
  */
 void mulNodes(stack_t **stack, unsigned int line_number)
 {
+	int product;
+
 	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
 	{
 		stackError(8, line_number, "mul");
 		return;
 	}
 	*stack = (*stack)->next;
-	int product = (*stack)->n * (*stack)->prev->n;
+	product = (*stack)->n * (*stack)->prev->n;
 	(*stack)->n = product;
 	free((*stack)->prev);
 	(*stack)->prev = NULL;
@@ -29,6 +31,8 @@ void mulNodes(stack_t **stack, unsigned int line_number)
  */
 void modNodes(stack_t **stack, unsigned int line_number)
 {
+	int remainder;
+
 	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
 	{
 		stackError(8, line_number, "mod");
@@ -40,7 +44,7 @@ void modNodes(stack_t **stack, unsigned int line_number)
 		return;
 	}
 	*stack = (*stack)->next;
-	int remainder = (*stack)->n % (*stack)->prev->n;
+	remainder = (*stack)->n % (*stack)->prev->n;
 	(*stack)->n = remainder;
 	free((*stack)->prev);
 	(*stack)->prev = NULL;

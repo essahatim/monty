@@ -62,49 +62,48 @@ int parsLine(char *buffer, int lineNum, int format)
 
 /**
  * findFunction - find the appropriate function for the opCode
- * @opCode: opCode
+ * @opcode: opcode
  * @value: argument of opCode
  * @format:  storage format. If 0 Nodes will be entered as a stack.
  * @line: line number
  * if 1 nodes will be entered as a queue.
  */
-void findFunction(char *opCode, char *value, int line, int format)
+void findFunction(char *opcode, char *value, int line, int format)
 {
 	int i;
 	int flag;
 
-	instruction_t funcList[] = 
-	{
-		{"push", addToStack},
-		{"pall", pStack},
-		{"pint", pTop},
-		{"pop", popTheTop,
-		{"swap", swapNodes},
-		{"add", addNodes},
-		{"sub", subNodes},
-		{"div", divNodes},
-		{"nop", nop},
-		{"mul", mulNodes},
-		{"mod", modNodes},
-		{"pchar", printChar},
-		{"pstr", printString},
-		{"rotl", rotFirst},
-		{"rotr", rotLast},
-		{NULL, NULL}
+	instruction_t func_list[] = {
+	{"push", addToStack},
+	{"pall", pStack},
+	{"pint", pTop},
+	{"pop", popTheTop},
+	{"swap", swapNodes},
+	{"add", addNodes},
+	{"sub", subNodes},
+	{"div", divNodes},
+	{"nop", nop},
+	{"mul", mulNodes},
+	{"mod", modNodes},
+	{"pchar", printChar},
+	{"pstr", printStr},
+	{"rotl", rotFirst},
+	{"rotr", rotLast},
+	{NULL, NULL}
 	};
 
-	if (opCode[0] == '#')
+	if (opcode[0] == '#')
 		return;
-	for (flag = 1, i = 0; funcList[i].opCode != NULL; i++)
+	for (flag = 1, i = 0; func_list[i].opcode != NULL; i++)
 	{
-		if (strcmp(opCode, funcList[i].opCode) == 0)
+		if (strcmp(opcode, func_list[i].opcode) == 0)
 		{
-			callFunction(funcList[i].f, opCode, value, line, format);
+			callFunction(func_list[i].f, opcode, value, line, format);
 			flag = 0;
 		}
 	}
 	if (flag == 1)
-		fileError(3, line, opCode);
+		fileError(3, line, opcode);
 }
 
 /**
@@ -118,7 +117,7 @@ void findFunction(char *opCode, char *value, int line, int format)
 void callFunction(op_func func, char *op, char *val, int line, int format)
 {
 	stack_t *node;
-	int flag = 1;
+	int flag = 1, i;
 
 	if (strcmp(op, "push") == 0)
 	{
@@ -126,10 +125,12 @@ void callFunction(op_func func, char *op, char *val, int line, int format)
 			val = val + 1, flag = -1;
 		if (val == NULL)
 			fileError(5, line);
-		for (int i = 0; val[i] != '\0'; i++)
+		for (i = 0; val[i] != '\0'; i++)
 		{
-			if (isdigit(val[i] == 0)
+			if (isdigit(val[i] == 0))
+			{
 				fileError(5, line);
+			}
 		}
 		node = createNode(atoi(val) * flag);
 		if (format == 0)

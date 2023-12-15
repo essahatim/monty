@@ -6,8 +6,9 @@
  * @new_node: Pointer to the new node.
  * @line: Line number of the opcode.
  */
-void addToStack(stack_t **new_node, unsigned int line)
+void addToStack(stack_t **new_node, __attribute__((unused))unsigned int line)
 {
+	stack_t *tmp;
 
 	if (new_node == NULL || *new_node == NULL)
 		exit(EXIT_FAILURE);
@@ -16,8 +17,6 @@ void addToStack(stack_t **new_node, unsigned int line)
 		head = *new_node;
 		return;
 	}
-	stack_t *tmp;
-
 	tmp = head;
 	head = *new_node;
 	head->next = tmp;
